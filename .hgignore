@@ -1,0 +1,14 @@
+syntax: glob
+auto-save-list
+anaconda-mode
+lisp
+#*
+*~
+elpa 
+*.dat
+.lsp-session-v1
+session.*
+eln-cache
+.cache
+lsp-cache
+syntax: regexp
