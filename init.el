@@ -68,7 +68,7 @@
 
 (unless(package-installed-p 'php-mode)
   (package-refresh-contents)
-;  (package-install 'php-mode)
+  (package-install 'php-mode)
 )
 
 (unless(package-installed-p 'web-mode)
@@ -129,7 +129,7 @@
 ;PHP file hooks
 (dolist (hook '(php-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
-  (add-hook hook (lambda () (lsp)))
+ ; (add-hook hook (lambda () (lsp)))
   (setq lsp-clients-php-server-command "/usr/bin/phpactor")
   (setq lsp-phpactor-path "/usr/bin/phpactor")
   (setq lsp-php-composer-dir "/home/veto/.config/composer")  
