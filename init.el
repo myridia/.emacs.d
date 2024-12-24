@@ -96,6 +96,27 @@
   (package-install 'kotlin-mode)
   )
 
+(unless(package-installed-p 'js2-mode)
+  (package-refresh-contents)
+  (package-install 'js2-mode)
+  )
+
+;Requirements: sudo npm i -g prettier
+(unless(package-installed-p 'prettier-js)
+  (package-refresh-contents)
+  (package-install 'prettier-js)
+  )
+
+(use-package js2-mode
+  :ensure t
+  :mode (("\\.js$" . js2-mode)) ;; makes sure we don't use for jsx files, too
+  :interpreter ("node" . js2-mode)
+  :config
+  (setq-default js2-strict-missing-semi-warning nil)
+  (setq-default js2-strict-trailing-comma-warning nil)
+  (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2))))
+
+
 ;Hooks
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
@@ -113,11 +134,14 @@
 )
 
 ;Js file hooks
-(dolist (hook '(js-mode-hook))
+(dolist (hook '(js2-mode-hook))
  (add-hook hook (lambda () (flyspell-mode 1)))
  (add-hook hook (lambda () (global-company-mode)))
- (add-hook hook (lambda () (setq indent-tabs-mode nil))) 
-)
+ (add-hook hook (lambda () (prettier-js-mode))) 
+ (add-hook hook (lambda () (setq indent-tabs-mode nil)))
+ 
+ )
+
 
 (dolist (hook '(python-mode-hook))
  (add-hook hook (lambda () (flyspell-mode 1)))
