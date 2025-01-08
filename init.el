@@ -107,11 +107,17 @@
   (package-install 'prettier-js)
   )
 
-;Requirements: sudo npm i -g prettier
+(unless(package-installed-p 'reformatter)
+  (package-refresh-contents)
+  (package-install 'reformatter)
+  )
+
 (unless(package-installed-p 'ruff-format)
   (package-refresh-contents)
   (package-install 'ruff-format)
   )
+
+
 
 (use-package js2-mode
   :ensure t
