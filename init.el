@@ -101,7 +101,7 @@
   (package-install 'js2-mode)
   )
 
-;Requirements: sudo npm i -g prettier
+;Require: sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
   (package-refresh-contents)
   (package-install 'prettier-js)
@@ -111,13 +111,11 @@
   (package-refresh-contents)
   (package-install 'reformatter)
   )
-
+;Require: curl -LsSf https://astral.sh/ruff/install.sh | sh
 (unless(package-installed-p 'ruff-format)
   (package-refresh-contents)
   (package-install 'ruff-format)
   )
-
-
 
 (use-package js2-mode
   :ensure t
@@ -159,7 +157,7 @@
  (add-hook hook (lambda () (flyspell-mode 1)))
  (add-hook hook (lambda () (anaconda-mode )))
  (add-hook hook (lambda () (global-company-mode)))
- (add-hook hook (lambda () (setq ruff-format-on-save-mode t))) 
+ (add-hook hook (lambda () (ruff-format-on-save-mode))) 
  )
 
 
