@@ -107,12 +107,6 @@
   (package-install 'prettier-js)
   )
 
-;Requirements: sudo npm i -g prettier
-(unless(package-installed-p 'ruff-format)
-  (package-refresh-contents)
-  (package-install 'ruff-format)
-  )
-
 (use-package js2-mode
   :ensure t
   :mode (("\\.js$" . js2-mode)) ;; makes sure we don't use for jsx files, too
@@ -153,7 +147,6 @@
  (add-hook hook (lambda () (flyspell-mode 1)))
  (add-hook hook (lambda () (anaconda-mode )))
  (add-hook hook (lambda () (global-company-mode)))
- (add-hook hook (lambda () (setq ruff-format-on-save-mode t))) 
  )
 
 
