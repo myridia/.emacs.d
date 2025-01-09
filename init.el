@@ -7,6 +7,9 @@
 ;(print x)
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
+;Disable Error Logs
+(setq create-lockfiles nil)
+
 ;Save all backupfiles to .saves instead 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
