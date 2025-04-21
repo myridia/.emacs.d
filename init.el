@@ -104,6 +104,17 @@
   (package-install 'js2-mode)
   )
 
+(unless(package-installed-p 'cmake-mode)
+  (package-refresh-contents)
+  (package-install 'cmake-mode)
+  )
+
+(unless(package-installed-p 'ahk-mode)
+  (package-refresh-contents)
+  (package-install 'ahk-mode)
+  )
+
+
 ;Require: sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
   (package-refresh-contents)
