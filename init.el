@@ -114,6 +114,15 @@
   (package-install 'ahk-mode)
   )
 
+; Needed
+; wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
+; sudo chmod a+x php-cs-fixer
+; sudo mv php-cs-fixer /usr/bin/php-cs-fixer
+(unless(package-installed-p 'php-cs-fixer)
+  (package-refresh-contents)
+  (package-install 'php-cs-fixer)
+  )
+
 
 ;Require: sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
@@ -178,12 +187,13 @@
 ;PHP file hooks
 (dolist (hook '(php-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
- ; (add-hook hook (lambda () (lsp)))
+  (add-hook hook (lambda () (lsp)))
+  (add-hook 'before-save-hook 'php-cs-fixer-before-save)
   (setq lsp-clients-php-server-command "/usr/bin/phpactor")
   (setq lsp-phpactor-path "/usr/bin/phpactor")
   (setq lsp-php-composer-dir "/home/veto/.config/composer")  
-  
   (setq lsp-enable-file-watchers nil)
+  
   )
 
 ;PlantUML
