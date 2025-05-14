@@ -186,7 +186,10 @@
  )
 
 
-;PHP file hooks
+; Required
+; sudo  curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
+; sudo chmod +x  phpactor.phar
+; sudo mv phpactor.phar /usr/bin/phpactor
 (dolist (hook '(php-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
   (add-hook hook (lambda () (lsp)))
