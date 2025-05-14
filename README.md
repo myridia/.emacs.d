@@ -5,6 +5,9 @@
 * Python
 * PHP
 * JavaScript
+* Go
+* AHK
+* Kotlin
 
 ## Requirements 
 * Install those programs what the emacs wrapper uses
