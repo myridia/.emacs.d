@@ -1,10 +1,12 @@
-# emacs_starter
-Our Emacs configuration to have always ready all development tools to work with emacs 
+# .emacs.d
 
-## Description 
-* My emacs settings, so i have the all the extra installed and setup for my development
+## Emacs configuration to work with
+* Rust
+* Python
+* PHP
+* JavaScript
 
-## All Requirements 
+## Requirements 
 * Install those programs what the emacs wrapper uses
 ```bash
 wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer 
@@ -14,5 +16,5 @@ curl -LsSf https://astral.sh/ruff/install.sh | sh
 sudo npm i -g prettier
 git clone https://github.com/rust-analyzer/rust-analyzer.git -b release
 cd rust-analyzer
-cargo xtask install --server # will install rust-analyzer into $HOME/.cargo/bin
+cargo xtask install --server 
 ```
