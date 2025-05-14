@@ -114,7 +114,7 @@
   (package-install 'ahk-mode)
   )
 
-; Needed
+; Required
 ; wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 ; sudo chmod a+x php-cs-fixer
 ; sudo mv php-cs-fixer /usr/bin/php-cs-fixer
@@ -124,7 +124,8 @@
   )
 
 
-;Require: sudo npm i -g prettier
+; Required
+; sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
   (package-refresh-contents)
   (package-install 'prettier-js)
@@ -134,7 +135,8 @@
   (package-refresh-contents)
   (package-install 'reformatter)
   )
-;Require: curl -LsSf https://astral.sh/ruff/install.sh | sh
+;Require
+;curl -LsSf https://astral.sh/ruff/install.sh | sh
 (unless(package-installed-p 'ruff-format)
   (package-refresh-contents)
   (package-install 'ruff-format)
