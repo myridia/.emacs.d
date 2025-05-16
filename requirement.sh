@@ -8,6 +8,11 @@ sudo chmod +x  phpactor.phar
 sudo mv phpactor.phar /usr/bin/phpactor
 curl -LsSf https://astral.sh/ruff/install.sh | sh
 sudo npm i -g prettier
+
+
+echo "...install rust"
+curl https://sh.rustup.rs -sSf | sh -s -- -y
+echo "...update rust"
 rustup update
 git clone https://github.com/rust-analyzer/rust-analyzer.git -b release
 cd rust-analyzer
