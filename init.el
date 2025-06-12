@@ -19,6 +19,17 @@
 (add-to-list 'package-archives'("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+; Another way to install packages
+(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
+
+
+
 
 ;Package Installs
 (unless package-archive-contents
@@ -115,6 +126,20 @@
   (package-install 'ahk-mode)
   )
 
+(unless(package-installed-p 'cc-mode)
+  (package-refresh-contents)
+  (package-install 'cc-mode)
+  )
+(unless(package-installed-p 'lsp-mode)
+  (package-refresh-contents)
+  (package-install 'lsp-mode)
+  )
+
+(unless(package-installed-p 'clang-format)
+  (package-refresh-contents)
+  (package-install 'clang-format)
+  )
+
 ; Required
 ; wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 ; sudo chmod a+x php-cs-fixer
@@ -153,8 +178,20 @@
   (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2))))
 
 
+
+
 ;Hooks
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;c file hooks
+(dolist (hook '(c-mode-hook))
+  (add-hook hook (lambda () (lsp)))
+ ; (add-hook 'c-mode-hook (lambda () (clang-format-on-save-mode)))
+
+)
+
+
+
 
 ;Text file hooks
 (dolist (hook '(text-mode-hook))

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt install clangd 
 wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer 
 sudo chmod a+x php-cs-fixer 
 sudo mv php-cs-fixer /usr/bin/php-cs-fixer

@@ -1,0 +1,8 @@
+;; -*- emacs-lisp -*- <25/06/12 10:27:45 /home/veto/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; Run `M-x tramp-cleanup-all-connections' instead.
+
+(((tramp-file-name "mtp" nil nil "moto_g(6)_plus" nil nil nil)
+  ("activation-uri" "mtp://motorola_moto_g_6__plus_ZY322QNTBP/")
+  ("media-device"
+   (tramp-media-device "mtp" "motorola_moto_g_6__plus_ZY322QNTBP" nil))))
