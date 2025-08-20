@@ -12,6 +12,8 @@
 ## Requirements 
 * Install those programs what the emacs wrapper uses
 ```bash
+sudo apt-get install libssl-dev pkg-config
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer 
 sudo chmod a+x php-cs-fixer 
 sudo mv php-cs-fixer /usr/bin/php-cs-fixer
