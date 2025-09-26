@@ -233,7 +233,7 @@
   (add-hook hook (lambda () (lsp)))
   (add-hook 'before-save-hook 'php-cs-fixer-before-save)
   (setq lsp-clients-php-server-command "/usr/bin/phpactor")
-  (setq lsp-phpactor-path "/usr/bin/phpactor")
+  ;(setq lsp-phpactor-path "/usr/bin/phpactor")
   (setq lsp-php-composer-dir "/home/veto/.config/composer")  
   (setq lsp-enable-file-watchers nil)
   
