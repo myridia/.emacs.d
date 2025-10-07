@@ -8,6 +8,10 @@
 (setenv "PHP_CS_FIXER_IGNORE_ENV" "true"); to set whe php-cs-fixer has to work with php8.4
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
+;Disable Singnature
+; you may install after  M-x package-install RET gnu-elpa-keyring-update
+;(setq package-check-signature nil)
+
 ;Disable Error Logs
 (setq create-lockfiles nil)
 
@@ -291,7 +295,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(go-mode go svg-mode-line-themes svg-tag-mode ## docker-compose-mode dockerfile-mode company-anaconda anaconda-mode company-jedi jedi logview ac-js2 eglot helm yasnippet company lsp-ui lsp-mode rust-mode use-package)))
+   '(gnu-elpa-keyring-update go-mode go svg-mode-line-themes svg-tag-mode ## docker-compose-mode dockerfile-mode company-anaconda anaconda-mode company-jedi jedi logview ac-js2 eglot helm yasnippet company lsp-ui lsp-mode rust-mode use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
