@@ -8,9 +8,11 @@
 (setenv "PHP_CS_FIXER_IGNORE_ENV" "true"); to set whe php-cs-fixer has to work with php8.4
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
-;Disable Singnature
-; you may install after  M-x package-install RET gnu-elpa-keyring-update
-;(setq package-check-signature nil)
+; Disable Signature (setq package-check-signature nil)
+; enable the below to disable the signature check, so you can install the updates via :
+; M-x package-install RET gnu-elpa-keyring-update
+; After you disable it again to be more secure
+; (setq package-check-signature nil)
 
 ;Disable Error Logs
 (setq create-lockfiles nil)
