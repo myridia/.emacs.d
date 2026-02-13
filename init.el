@@ -33,10 +33,6 @@
   (package-refresh-contents)
   (mapc #'package-install package-selected-packages))
 
-
-
-
-
 ;Package Installs
 (unless package-archive-contents
   (package-refresh-contents))
@@ -44,7 +40,12 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
-)
+  )
+
+(unless(package-installed-p 'vue-mode)
+  (package-refresh-contents)
+  (package-install 'vue-mode)
+  )
 
 (unless(package-installed-p 'rust-mode)
   (package-refresh-contents)
@@ -227,6 +228,13 @@
  (add-hook hook (lambda () (anaconda-mode )))
  (add-hook hook (lambda () (global-company-mode)))
  (add-hook hook (lambda () (ruff-format-on-save-mode))) 
+ )
+
+(dolist (hook '(vue-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+ ;(add-hook hook (lambda () (anaconda-mode )))
+ (add-hook hook (lambda () (global-company-mode)))
+ ;(add-hook hook (lambda () (ruff-format-on-save-mode))) 
  )
 
 
