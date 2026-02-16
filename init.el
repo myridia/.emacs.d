@@ -177,13 +177,13 @@
 
 (use-package js2-mode
   :ensure t
-  :mode (("\\.js$" . js2-mode)) ;; makes sure we don't use for jsx files, too
+  :mode (("\\.js$" . js2-mode)) ;; makes sure we use only for js
   :interpreter ("node" . js2-mode)
   :config
   (setq-default js2-strict-missing-semi-warning nil)
   (setq-default js2-strict-trailing-comma-warning nil)
   (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2))))
-
+  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
 
 
