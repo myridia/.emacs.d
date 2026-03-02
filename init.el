@@ -224,7 +224,6 @@
  (add-hook hook (lambda () (global-company-mode)))
  (add-hook hook (lambda () (prettier-js-mode))) 
  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
- 
  )
 
 
@@ -240,14 +239,14 @@
   (add-hook hook (lambda () (global-company-mode)))
   (add-hook hook (lambda () (prettier-js-mode)))
   (add-hook hook (lambda () (setq indent-tabs-mode nil)))
-  
+  )
 
- 
-(custom-set-faces
- '(default ((t (:background "unspecified")))))
- 
- )
-
+(dolist (hook '(html-mode-hook))
+ (add-hook hook (lambda () (flyspell-mode 1)))  
+ (add-hook hook (lambda () (global-company-mode)))
+ (add-hook hook (lambda () (prettier-js-mode))) 
+ (add-hook hook (lambda () (setq indent-tabs-mode nil)))
+  )
 
 ; Required
 ; sudo  curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
