@@ -186,6 +186,11 @@
   (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
 
+; Remove ugly background for vue
+(use-package vue-mode
+               :config
+               (setq mmm-submode-decoration-level 0))
+
 
 ;Hooks
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -232,9 +237,15 @@
 
 (dolist (hook '(vue-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
- ;(add-hook hook (lambda () (anaconda-mode )))
- (add-hook hook (lambda () (global-company-mode)))
- ;(add-hook hook (lambda () (ruff-format-on-save-mode))) 
+  (add-hook hook (lambda () (global-company-mode)))
+  (add-hook hook (lambda () (prettier-js-mode)))
+  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
+  
+
+ 
+(custom-set-faces
+ '(default ((t (:background "unspecified")))))
+ 
  )
 
 
