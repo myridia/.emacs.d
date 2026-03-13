@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo apt-get install clang-format -y
 sudo apt-get install clangd php-cli  -y 
 wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer 
 sudo chmod a+x php-cs-fixer 

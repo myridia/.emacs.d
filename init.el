@@ -147,6 +147,10 @@
   (package-install 'clang-format)
   )
 
+
+
+
+
 ; Required
 ; wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 ; sudo chmod a+x php-cs-fixer
@@ -234,6 +238,7 @@
  (add-hook hook (lambda () (ruff-format-on-save-mode))) 
  )
 
+
 (dolist (hook '(vue-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
   (add-hook hook (lambda () (global-company-mode)))
@@ -247,6 +252,14 @@
  (add-hook hook (lambda () (prettier-js-mode))) 
  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
   )
+
+(dolist (hook '(c-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (clang-format-on-save-mode))) 
+ )
+
+
+
 
 ; Required
 ; sudo  curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
