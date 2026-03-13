@@ -147,7 +147,24 @@
   (package-install 'clang-format)
   )
 
+(unless(package-installed-p 'format-all)
+  (package-refresh-contents)
+  (package-install 'elpa-format-all)
+  )
 
+
+
+
+
+; Format C code 
+(use-package format-all
+  :commands format-all-mode
+  :hook (prog-mode . format-all-mode)
+  :config
+
+  (setq-default format-all-formatters
+                '(("C"     (clang-format))
+                  ("Shell" (shfmt "-i" "2" "-ci")))))  
 
 
 
@@ -255,7 +272,9 @@
 
 (dolist (hook '(c-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
-  (add-hook hook (lambda () (clang-format-on-save-mode))) 
+					;  (add-hook hook (lambda () (clang-format-on-save-mode 1)))
+
+
  )
 
 
