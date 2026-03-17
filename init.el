@@ -149,7 +149,7 @@
 
 (unless(package-installed-p 'format-all)
   (package-refresh-contents)
-  (package-install 'elpa-format-all)
+  (package-install 'format-all)
   )
 
 
