@@ -18,6 +18,13 @@ A multi-language IDE configuration for Emacs with auto-formatting on save, LSP s
 	./requirement.sh
 ```
 
+## How to use, an example with Debian/Linux OS
+* In your home directory install the .emacs.d folder 
+```bash
+    mv .emacs.d .eamcs.d.1
+	git clone https://github.com/myridia/.emacs.d
+```
+
 ## Add Repository
 ```
 git remote add codeberg ssh://git@codeberg.org/veto/emacs.d.git
