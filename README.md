@@ -27,3 +27,9 @@ git clone https://github.com/rust-analyzer/rust-analyzer.git -b release
 cd rust-analyzer
 cargo xtask install --server 
 ```
+
+## Add Repository
+```
+git remote add codeberg ssh://git@codeberg.org/veto/emacs.d.git
+git push codeberg
+```
