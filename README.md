@@ -1,4 +1,4 @@
-# .emacs.d
+# ![emacs.d](pages/public/img/icon_192x192.png) emacs.d
 
 ## Emacs configuration to work with
 * Rust
