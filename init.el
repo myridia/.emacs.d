@@ -33,10 +33,6 @@
   (package-refresh-contents)
   (mapc #'package-install package-selected-packages))
 
-
-
-
-
 ;Package Installs
 (unless package-archive-contents
   (package-refresh-contents))
@@ -44,7 +40,12 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
-)
+  )
+
+(unless(package-installed-p 'vue-mode)
+  (package-refresh-contents)
+  (package-install 'vue-mode)
+  )
 
 (unless(package-installed-p 'rust-mode)
   (package-refresh-contents)
@@ -146,6 +147,27 @@
   (package-install 'clang-format)
   )
 
+(unless(package-installed-p 'format-all)
+  (package-refresh-contents)
+  (package-install 'format-all)
+  )
+
+
+
+
+
+; Format C code 
+(use-package format-all
+  :commands format-all-mode
+  :hook (prog-mode . format-all-mode)
+  :config
+
+  (setq-default format-all-formatters
+                '(("C"     (clang-format))
+                  ("Shell" (shfmt "-i" "2" "-ci")))))  
+
+
+
 ; Required
 ; wget https://cs.symfony.com/download/php-cs-fixer-v3.phar -O php-cs-fixer
 ; sudo chmod a+x php-cs-fixer
@@ -176,14 +198,19 @@
 
 (use-package js2-mode
   :ensure t
-  :mode (("\\.js$" . js2-mode)) ;; makes sure we don't use for jsx files, too
+  :mode (("\\.js$" . js2-mode)) ;; makes sure we use only for js
   :interpreter ("node" . js2-mode)
   :config
   (setq-default js2-strict-missing-semi-warning nil)
   (setq-default js2-strict-trailing-comma-warning nil)
   (add-hook 'js2-mode-hook (lambda () (setq js2-basic-offset 2))))
+  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
 
 
+; Remove ugly background for vue
+(use-package vue-mode
+               :config
+               (setq mmm-submode-decoration-level 0))
 
 
 ;Hooks
@@ -218,7 +245,6 @@
  (add-hook hook (lambda () (global-company-mode)))
  (add-hook hook (lambda () (prettier-js-mode))) 
  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
- 
  )
 
 
@@ -230,6 +256,30 @@
  )
 
 
+(dolist (hook '(vue-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+  (add-hook hook (lambda () (global-company-mode)))
+  (add-hook hook (lambda () (prettier-js-mode)))
+  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
+  )
+
+(dolist (hook '(html-mode-hook))
+ (add-hook hook (lambda () (flyspell-mode 1)))  
+ (add-hook hook (lambda () (global-company-mode)))
+ (add-hook hook (lambda () (prettier-js-mode))) 
+ (add-hook hook (lambda () (setq indent-tabs-mode nil)))
+  )
+
+(dolist (hook '(c-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1)))
+					;  (add-hook hook (lambda () (clang-format-on-save-mode 1)))
+
+
+ )
+
+
+
+
 ; Required
 ; sudo  curl -Lo phpactor.phar https://github.com/phpactor/phpactor/releases/latest/download/phpactor.phar
 ; sudo chmod +x  phpactor.phar
@@ -239,7 +289,7 @@
   (add-hook hook (lambda () (lsp)))
   (add-hook 'before-save-hook 'php-cs-fixer-before-save)
   (setq lsp-clients-php-server-command "/usr/bin/phpactor")
-  ;(setq lsp-phpactor-path "/usr/bin/phpactor")
+  (setq lsp-phpactor-path "/usr/bin/phpactor")
   (setq lsp-php-composer-dir "/home/veto/.config/composer")  
   (setq lsp-enable-file-watchers nil)
   
@@ -296,11 +346,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(gnu-elpa-keyring-update go-mode go svg-mode-line-themes svg-tag-mode ## docker-compose-mode dockerfile-mode company-anaconda anaconda-mode company-jedi jedi logview ac-js2 eglot helm yasnippet company lsp-ui lsp-mode rust-mode use-package)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
