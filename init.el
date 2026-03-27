@@ -164,6 +164,7 @@
 
   (setq-default format-all-formatters
                 '(("C"     (clang-format))
+                  ("CSS"     (prettier))
                   ("Shell" (shfmt "-i" "2" "-ci")))))  
 
 
