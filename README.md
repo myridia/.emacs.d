@@ -39,7 +39,7 @@ Here's a tailored **README.md** for your specific Emacs configuration:
 
 ## ✨ Features
 
-- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, etc.)
+- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, etc.)
 - **LSP integration** via `lsp-mode` with `lsp-ui`
 - **Syntax checking** with `flycheck`
 - **Auto-completion** with `company` + `anaconda` (Python)
@@ -100,6 +100,7 @@ All packages will auto-install on first run.
 | **JavaScript** | `js2-mode` | `prettier` | lsp-mode |
 | **Vue** | `vue-mode` | `prettier` | lsp-mode |
 | **HTML** | `html-mode` | `prettier` | - |
+| **CSS** | `html-mode` | `prettier` | - |
 | **Rust** | `rust-mode` | `rustfmt` | rust-analyzer |
 | **Go** | `go-mode` | gofmt | gopls |
 | **Shell** | `sh-mode` | `shfmt` | bash-language-server |
