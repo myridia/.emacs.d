@@ -50,7 +50,12 @@
 (unless(package-installed-p 'rust-mode)
   (package-refresh-contents)
   (package-install 'rust-mode)
-)
+  )
+
+(unless(package-installed-p 'jinja2-mode)
+  (package-refresh-contents)
+  (package-install 'jinja2-mode))
+
 
 (unless(package-installed-p 'markdown-mode)
   (package-refresh-contents)
@@ -270,12 +275,18 @@
   (add-hook hook (lambda () (setq indent-tabs-mode nil)))
   
 )
+
 (dolist (hook '(html-mode-hook))
  (add-hook hook (lambda () (flyspell-mode 1)))  
  (add-hook hook (lambda () (global-company-mode)))
  (add-hook hook (lambda () (prettier-js-mode))) 
  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
-  )
+ )
+
+
+
+
+
 
 (dolist (hook '(c-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
