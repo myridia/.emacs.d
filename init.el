@@ -50,7 +50,12 @@
 (unless(package-installed-p 'rust-mode)
   (package-refresh-contents)
   (package-install 'rust-mode)
-)
+  )
+
+(unless(package-installed-p 'jinja2-mode)
+  (package-refresh-contents)
+  (package-install 'jinja2-mode))
+
 
 (unless(package-installed-p 'markdown-mode)
   (package-refresh-contents)
@@ -137,6 +142,12 @@
   (package-refresh-contents)
   (package-install 'cc-mode)
   )
+
+(unless(package-installed-p 'elixir-mode)
+  (package-refresh-contents)
+  (package-install 'elixir-mode)
+  )
+
 (unless(package-installed-p 'lsp-mode)
   (package-refresh-contents)
   (package-install 'lsp-mode)
@@ -156,7 +167,7 @@
 
 
 
-; Format C code 
+; General Formatter 
 (use-package format-all
   :commands format-all-mode
   :hook (prog-mode . format-all-mode)
@@ -164,8 +175,9 @@
 
   (setq-default format-all-formatters
                 '(("C"     (clang-format))
+                  ("CSS"     (prettier))
+                  ("Elixir"   (mix-format))		  
                   ("Shell" (shfmt "-i" "2" "-ci")))))  
-
 
 
 ; Required
@@ -261,14 +273,20 @@
   (add-hook hook (lambda () (global-company-mode)))
   (add-hook hook (lambda () (prettier-js-mode)))
   (add-hook hook (lambda () (setq indent-tabs-mode nil)))
-  )
+  
+)
 
 (dolist (hook '(html-mode-hook))
  (add-hook hook (lambda () (flyspell-mode 1)))  
  (add-hook hook (lambda () (global-company-mode)))
  (add-hook hook (lambda () (prettier-js-mode))) 
  (add-hook hook (lambda () (setq indent-tabs-mode nil)))
-  )
+ )
+
+
+
+
+
 
 (dolist (hook '(c-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1)))
@@ -276,6 +294,7 @@
 
 
  )
+
 
 
 
@@ -308,15 +327,19 @@
 
 
 ;Function test
-(defun test-fn ()
+(defun testfn ()
   (interactive)
   (message "Hello World")
+
+;(sit-for 3) ; Pause for 3 seconds
+;  (switch-to-buffer-other-window "*Messages*")
+  
 )
 
 
 (defun test-test-fn ()
   (interactive)
-  (test-fn)
+  (testfn)
 )
 
 
@@ -331,7 +354,7 @@
   (backward-char 3)
   )  
 
-(global-set-key (kbd "M-/") (lambda () (interactive) (test-fn)))
+(global-set-key (kbd "M-/") (lambda () (interactive) (testfn)))
 (global-set-key (kbd "C-c f") (lambda () (interactive) (get_buffer_path)))
 (global-set-key (kbd "C-c c") (lambda () (interactive) (insert_console)))  
 
@@ -353,4 +376,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+
+
 
