@@ -1,3 +1,5 @@
+<img src=".emacs.d.svg" alt=".emacs.d" width="120">
+
 # ![emacs.d](pages/public/img/icon_192x192.png) emacs.d
 
 # Emacs IDE Starter Configuration

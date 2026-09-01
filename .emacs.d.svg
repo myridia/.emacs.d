@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="56" fill="#1a1a2e"/>
+  <circle cx="60" cy="60" r="52" fill="none" stroke="#ff6347" stroke-width="2"/>
+  <text x="60" y="58" text-anchor="middle" font-family="monospace" font-size="22" fill="#ff6347" font-weight="bold">λ</text>
+  <text x="60" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#a0a0a0">emacs</text>
+</svg>
