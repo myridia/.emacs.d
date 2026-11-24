@@ -259,10 +259,6 @@
   :ensure t
   :hook ((emacs-lisp-mode lisp-mode) . paredit-mode))
 
-(defface nt-paren-blink
-  '((t (:background "#ffffff" :foreground "#000000" :weight bold)))
-  "Face for the repeating matching-paren blink.")
-
 (defvar nt-blink-overlays nil)
 (defvar nt-blink-timer nil)
 (defvar nt-blink-last nil)
@@ -284,7 +280,9 @@
 (defun nt-blink-toggle ()
   (dolist (ov nt-blink-overlays)
     (let ((on (overlay-get ov 'nt-blink-on)))
-      (overlay-put ov 'face (if on 'show-paren-match 'nt-paren-blink))
+      (overlay-put ov 'face (if on
+                               'show-paren-match
+                             (overlay-get ov 'nt-blink-base)))
       (overlay-put ov 'nt-blink-on (not on)))))
 
 (defun nt-blink-paren-pair ()
