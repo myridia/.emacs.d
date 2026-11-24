@@ -36,6 +36,7 @@ emacs
 - `M-x lsp` — start LSP manually
 
 ## Conventions
+- All package installs go through `nt-install`, which skips packages with unmet Emacs-version requirements instead of aborting startup.
 - No comments in code unless asked.
 - Lockfiles disabled; backups go to `~/.saves/`.
 - Formatters run on save for 10+ languages.

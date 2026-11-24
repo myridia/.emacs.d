@@ -21,6 +21,14 @@
 (add-to-list 'package-archives'("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+(defun nt-install (pkg)
+  (condition-case err
+      (progn
+        (unless package-archive-contents
+          (package-refresh-contents))
+        (package-install pkg))
+    (error (message "Skipping %s: %s" pkg (error-message-string err)))))
+
 ; Another way to install packages
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
     projectile hydra flycheck company avy which-key helm-xref dap-mode
@@ -28,7 +36,7 @@
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
-  (mapc #'package-install package-selected-packages))
+  (mapc #'nt-install package-selected-packages))
 
 ;Package Installs
 (unless package-archive-contents
@@ -36,128 +44,128 @@
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package)
+  (nt-install 'use-package)
   )
 
 (unless(package-installed-p 'vue-mode)
   (package-refresh-contents)
-  (package-install 'vue-mode)
+  (nt-install 'vue-mode)
   )
 
 (unless(package-installed-p 'rust-mode)
   (package-refresh-contents)
-  (package-install 'rust-mode)
+  (nt-install 'rust-mode)
   )
 
 (unless(package-installed-p 'jinja2-mode)
   (package-refresh-contents)
-  (package-install 'jinja2-mode))
+  (nt-install 'jinja2-mode))
 
 
 (unless(package-installed-p 'markdown-mode)
   (package-refresh-contents)
-  (package-install 'markdown-mode)
+  (nt-install 'markdown-mode)
   )
 
 (unless(package-installed-p 'company)
   (package-refresh-contents)
-  (package-install 'company)
+  (nt-install 'company)
 )
 
 (unless(package-installed-p 'lsp-ui)
   (package-refresh-contents)
-  (package-install 'lsp-ui)
+  (nt-install 'lsp-ui)
   )
 
 (unless(package-installed-p 'anaconda-mode)
   (package-refresh-contents)
-  (package-install 'anaconda-mode)
+  (nt-install 'anaconda-mode)
   )
 
 (unless(package-installed-p 'company-anaconda)
   (package-refresh-contents)
-  (package-install 'company-anaconda)
+  (nt-install 'company-anaconda)
   )
 
 (unless(package-installed-p 'docker-compose-mode)
   (package-refresh-contents)
-  (package-install 'docker-compose-mode)
+  (nt-install 'docker-compose-mode)
   )
 
 (unless(package-installed-p 'yaml-mode)
   (package-refresh-contents)
-  (package-install 'yaml-mode)
+  (nt-install 'yaml-mode)
 )
 
 
 (unless(package-installed-p 'php-mode)
   (package-refresh-contents)
-  (package-install 'php-mode)
+  (nt-install 'php-mode)
 )
 
 (unless(package-installed-p 'web-mode)
   (package-refresh-contents)
-  (package-install 'web-mode)
+  (nt-install 'web-mode)
 )
 
 (unless(package-installed-p 'plantuml-mode)
   (package-refresh-contents)
-  (package-install 'plantuml-mode)
+  (nt-install 'plantuml-mode)
   )
 
 (unless(package-installed-p 'svg-tag-mode)
   (package-refresh-contents)
-  (package-install 'svg-tag-mode)
+  (nt-install 'svg-tag-mode)
   )
 
 (unless(package-installed-p 'go-mode)
   (package-refresh-contents)
-  (package-install 'go-mode)
+  (nt-install 'go-mode)
   )
 
 (unless(package-installed-p 'kotlin-mode)
   (package-refresh-contents)
-  (package-install 'kotlin-mode)
+  (nt-install 'kotlin-mode)
   )
 
 (unless(package-installed-p 'js2-mode)
   (package-refresh-contents)
-  (package-install 'js2-mode)
+  (nt-install 'js2-mode)
   )
 
 (unless(package-installed-p 'cmake-mode)
   (package-refresh-contents)
-  (package-install 'cmake-mode)
+  (nt-install 'cmake-mode)
   )
 
 (unless(package-installed-p 'ahk-mode)
   (package-refresh-contents)
-  (package-install 'ahk-mode)
+  (nt-install 'ahk-mode)
   )
 
 (unless(package-installed-p 'cc-mode)
   (package-refresh-contents)
-  (package-install 'cc-mode)
+  (nt-install 'cc-mode)
   )
 
 (unless(package-installed-p 'elixir-mode)
   (package-refresh-contents)
-  (package-install 'elixir-mode)
+  (nt-install 'elixir-mode)
   )
 
 (unless(package-installed-p 'lsp-mode)
   (package-refresh-contents)
-  (package-install 'lsp-mode)
+  (nt-install 'lsp-mode)
   )
 
 (unless(package-installed-p 'clang-format)
   (package-refresh-contents)
-  (package-install 'clang-format)
+  (nt-install 'clang-format)
   )
 
 (unless(package-installed-p 'format-all)
   (package-refresh-contents)
-  (package-install 'format-all)
+  (nt-install 'format-all)
   )
 
 
@@ -183,7 +191,7 @@
 ; sudo mv php-cs-fixer /usr/bin/php-cs-fixer
 (unless(package-installed-p 'php-cs-fixer)
   (package-refresh-contents)
-  (package-install 'php-cs-fixer)
+  (nt-install 'php-cs-fixer)
   )
 
 
@@ -191,18 +199,18 @@
 ; sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
   (package-refresh-contents)
-  (package-install 'prettier-js)
+  (nt-install 'prettier-js)
   )
 
 (unless(package-installed-p 'reformatter)
   (package-refresh-contents)
-  (package-install 'reformatter)
+  (nt-install 'reformatter)
   )
 ;Require
 ;curl -LsSf https://astral.sh/ruff/install.sh | sh
 (unless(package-installed-p 'ruff-format)
   (package-refresh-contents)
-  (package-install 'ruff-format)
+  (nt-install 'ruff-format)
   )
 
 (use-package js2-mode
