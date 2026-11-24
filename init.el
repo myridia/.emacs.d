@@ -245,6 +245,44 @@
                       :foreground "#ffffff" :background "#ff0000"
                       :weight 'bold))
 
+(show-paren-mode 1)
+(setq show-paren-style 'expression)
+(set-face-attribute 'show-paren-match nil
+                    :background "#ffbd2e" :foreground "#000000" :weight 'bold)
+(set-face-attribute 'show-paren-mismatch nil
+                    :background "#ff0000" :foreground "#ffffff" :weight 'bold)
+
+(electric-pair-mode 1)
+
+(use-package paredit
+  :ensure t
+  :hook ((emacs-lisp-mode lisp-mode) . paredit-mode))
+
+(require 'pulse)
+(setq pulse-delay 0.02
+      pulse-iterations 4)
+
+(defface nt-paren-blink
+  '((t (:background "#ffffff" :foreground "#000000" :weight bold)))
+  "Face for the brief matching-paren blink.")
+
+(defun nt-blink-paren-pair ()
+  (let* ((p (point))
+         (open (eq (char-after p) ?\())
+         (close (eq (char-after (1- p)) ?\)))
+         (at (cond (open p) (close (1- p)))))
+    (when at
+      (let ((other (condition-case nil
+                       (if open
+                           (1- (scan-sexps at 1))
+                         (scan-sexps (1+ at) -1))
+                     (error nil))))
+        (when other
+          (pulse-momentary-highlight-region at (1+ at) 'nt-paren-blink)
+          (pulse-momentary-highlight-region other (1+ other) 'nt-paren-blink))))))
+
+(add-hook 'post-command-hook #'nt-blink-paren-pair)
+
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;c file hooks

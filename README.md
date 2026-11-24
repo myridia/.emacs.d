@@ -159,6 +159,15 @@ Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatt
 
 `rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces use bright colored backgrounds with dark bold text for visibility.
 
+### Lisp Readability
+
+- `show-paren-mode` with `show-paren-style 'expression` highlights the whole matching form at the cursor; mismatches are red.
+- `electric-pair-mode` inserts a matching delimiter when you type an opening one.
+- `paredit-mode` is enabled in `emacs-lisp-mode` and `lisp-mode` for structural editing (slurp, barf, wrap, move by expression).
+- A short white flash blinks both matching parens when the cursor lands on one (`pulse-delay` 0.02s, 4 iterations).
+
+Useful built-in motion: `C-M-f` / `C-M-b` move by form, `C-M-SPC` marks one form, `C-M-u` moves up a level, and `M-x check-parens` finds unbalanced delimiters.
+
 ### Backup & Lockfiles
 
 - **Lockfiles disabled**: `(setq create-lockfiles nil)`
@@ -213,7 +222,7 @@ Inserts `console.log('');` at cursor and places cursor inside quotes for JavaScr
 - **Navigation**: `helm-lsp`, `helm-xref`, `avy`, `which-key`, `hydra`
 - **Languages**: `js2-mode`, `vue-mode`, `php-mode`, `python-mode`, `rust-mode`, `go-mode`, `kotlin-mode`, `web-mode`, `markdown-mode`, `yaml-mode`, `docker-compose-mode`, `cmake-mode`, `ahk-mode`, `plantuml-mode`
 - **Formatting**: `format-all`, `prettier-js`, `php-cs-fixer`, `ruff-format`, `clang-format`
-- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`, `rainbow-delimiters`
+- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`, `rainbow-delimiters`, `paredit`
 
 ## 🤝 Contributing
 
