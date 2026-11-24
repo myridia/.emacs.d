@@ -268,32 +268,44 @@
 (defvar nt-blink-last nil)
 
 (defun nt-blink-clear ()
-  (when (timerp nt-blink-timer)
+  (when nt-blink-timer
     (cancel-timer nt-blink-timer))
   (setq nt-blink-timer nil
         nt-blink-last nil)
   (mapc #'delete-overlay nt-blink-overlays)
   (setq nt-blink-overlays nil))
 
+(defun nt-blink-arm ()
+  (unless nt-blink-timer
+    (setq nt-blink-timer
+          (run-at-time blink-cursor-interval nil #'nt-blink-toggle))))
+
 (defun nt-blink-toggle ()
+  (setq nt-blink-timer nil)
   (dolist (ov nt-blink-overlays)
     (let ((on (overlay-get ov 'nt-blink-on)))
       (overlay-put ov 'face (if on 'show-paren-match 'nt-paren-blink))
-      (overlay-put ov 'nt-blink-on (not on)))))
+      (overlay-put ov 'nt-blink-on (not on))))
+  (nt-blink-arm))
 
 (defun nt-blink-paren-pair ()
   (let* ((p (point))
-         (open (eq (char-after p) ?\())
-         (close (eq (char-after (1- p)) ?\)))
-         (at (cond (open p) (close (1- p))))
+         (open (eq (char-after p) ?\()))
+         (close (eq (char-after p) ?\)))
+         (at (cond (open p)
+                   (close p)
+                   ((eq (char-before p) ?\() (1- p))
+                   ((eq (char-before p) ?\)) (1- p))))
+         (is-open (or open (eq (char-before p) ?\()))
          (other (when at
                   (condition-case nil
-                      (if open
+                      (if is-open
                           (1- (scan-sexps at 1))
                         (scan-sexps (1+ at) -1))
                     (error nil))))
          (key (when other (cons (current-buffer) other))))
-    (unless (equal key nt-blink-last)
+    (if (equal key nt-blink-last)
+        (nt-blink-arm)
       (nt-blink-clear)
       (setq nt-blink-last key)
       (when key
@@ -302,9 +314,7 @@
           (overlay-put ov 'nt-blink-on t)
           (overlay-put ov 'priority 100)
           (push ov nt-blink-overlays))
-        (setq nt-blink-timer
-              (run-at-time blink-cursor-interval blink-cursor-interval
-                           #'nt-blink-toggle))))))
+        (nt-blink-arm)))))
 
 (add-hook 'post-command-hook #'nt-blink-paren-pair)
 
