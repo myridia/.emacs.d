@@ -274,7 +274,7 @@
 (defun nt-blink-arm ()
   (unless nt-blink-timer
     (setq nt-blink-timer
-          (run-at-time blink-cursor-interval blink-cursor-interval
+          (run-at-time blink-cursor-delay blink-cursor-interval
                        #'nt-blink-toggle))))
 
 (defun nt-blink-toggle ()
