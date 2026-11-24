@@ -43,7 +43,7 @@ git push codeberg
 - **Custom utilities** for development workflow
 - **Rainbow delimiters** for Lisp/Elisp/programming modes
 - **No lockfiles** + centralized backups (`~/.saves`)
-- No network access at startup: `package-refresh-contents` was removed from the init file; installs only happen on demand and failures are skipped with a message
+- No archive refresh on every startup: `nt-install` downloads only when a package is actually missing; `use-package` uses `:ensure nil` so it never triggers its own installs
 
 ## 🚀 Quick Start
 

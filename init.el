@@ -22,9 +22,13 @@
 (package-initialize)
 
 (defun nt-install (pkg)
-  (condition-case err
-      (package-install pkg)
-    (error (message "Skipping %s: %s" pkg (error-message-string err)))))
+  (unless (package-installed-p pkg)
+    (condition-case err
+        (progn
+          (unless package-archive-contents
+            (package-refresh-contents))
+          (package-install pkg))
+      (error (message "Skipping %s: %s" pkg (error-message-string err))))))
 
 ; Another way to install packages
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
@@ -178,7 +182,7 @@
   )
 
 (use-package js2-mode
-  :ensure t
+  :ensure nil
   :mode (("\\.js$" . js2-mode)) ;; makes sure we use only for js
   :interpreter ("node" . js2-mode)
   :config
@@ -196,7 +200,7 @@
 
 ;Hooks
 (use-package rainbow-delimiters
-  :ensure t
+  :ensure nil
   :hook (prog-mode . rainbow-delimiters-mode)
   :config
   (setq rainbow-delimiters-max-face-count 9)

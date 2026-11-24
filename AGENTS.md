@@ -36,7 +36,7 @@ emacs
 - `M-x lsp` — start LSP manually
 
 ## Conventions
-- All package installs go through `nt-install`, which skips packages with unmet Emacs-version requirements instead of aborting startup. There are no `package-refresh-contents` calls at startup; Emacs never contacts archives while loading.
+- `nt-install` installs only when a package is missing, and refreshes archive contents once only if they are not cached. There are no unconditional `package-refresh-contents` calls; `use-package` uses `:ensure nil`.
 - No comments in code unless asked.
 - Lockfiles disabled; backups go to `~/.saves/`.
 - Formatters run on save for 10+ languages.
