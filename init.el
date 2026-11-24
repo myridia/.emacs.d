@@ -27,7 +27,8 @@
 
 ; Another way to install packages
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
-    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+    projectile hydra flycheck company avy which-key helm-xref dap-mode
+    rainbow-delimiters))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -226,6 +227,10 @@
 
 
 ;Hooks
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;c file hooks

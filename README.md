@@ -48,6 +48,7 @@ Here's a tailored **README.md** for your specific Emacs configuration:
 - **Project management** with `projectile` + `helm` integration
 - **Fuzzy finding** with `helm`, `helm-lsp`, `helm-xref`
 - **Custom utilities** for development workflow
+- **Rainbow delimiters** for Lisp/Elisp/programming modes
 - **No lockfiles** + centralized backups (`~/.saves`)
 
 ## 🚀 Quick Start
@@ -214,7 +215,7 @@ Inserts `console.log('');` at cursor and places cursor inside quotes for JavaScr
 - **Navigation**: `helm-lsp`, `helm-xref`, `avy`, `which-key`, `hydra`
 - **Languages**: `js2-mode`, `vue-mode`, `php-mode`, `python-mode`, `rust-mode`, `go-mode`, `kotlin-mode`, `web-mode`, `markdown-mode`, `yaml-mode`, `docker-compose-mode`, `cmake-mode`, `ahk-mode`, `plantuml-mode`
 - **Formatting**: `format-all`, `prettier-js`, `php-cs-fixer`, `ruff-format`, `clang-format`
-- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`
+- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`, `rainbow-delimiters`
 
 ## 🤝 Contributing
 
