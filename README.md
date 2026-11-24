@@ -161,10 +161,10 @@ Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatt
 
 ### Lisp Readability
 
-- `show-paren-mode` with `show-paren-style 'parenthesis` highlights only the two matching delimiters; mismatches are red.
+- `show-paren-mode` with `show-paren-style 'parenthesis` highlights only the matching delimiter; `show-paren-highlight-openparen` is off so the brace under the cursor keeps its normal color. Mismatches are red.
 - `electric-pair-mode` inserts a matching delimiter when you type an opening one.
 - `paredit-mode` is enabled in `emacs-lisp-mode` and `lisp-mode` for structural editing (slurp, barf, wrap, move by expression).
-- Only the matching (second) paren blinks between its normal rainbow color and the orange `show-paren-match` highlight while the cursor sits on the first one, using the cursor's own `blink-cursor-delay` and `blink-cursor-interval`. The overlay priority is kept above `show-paren-priority` so the blink is visible. The built-in cursor jump (`blink-matching-paren`) is off.
+- Only the matching (second) paren blinks between no background (`default`) and its original rainbow color while the cursor sits on the first one, using the cursor's own `blink-cursor-delay` and `blink-cursor-interval`. The overlay priority is kept above `show-paren-priority` so the blink is visible. The built-in cursor jump (`blink-matching-paren`) is off.
 
 Useful built-in motion: `C-M-f` / `C-M-b` move by form, `C-M-SPC` marks one form, `C-M-u` moves up a level, and `M-x check-parens` finds unbalanced delimiters.
 

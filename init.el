@@ -247,6 +247,7 @@
 
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
+(setq show-paren-highlight-openparen nil)
 (setq blink-matching-paren nil)
 (set-face-attribute 'show-paren-match nil
                     :background "#ffbd2e" :foreground "#000000" :weight 'bold)
@@ -281,7 +282,7 @@
   (dolist (ov nt-blink-overlays)
     (let ((on (overlay-get ov 'nt-blink-on)))
       (overlay-put ov 'face (if on
-                               'show-paren-match
+                               'default
                              (overlay-get ov 'nt-blink-base)))
       (overlay-put ov 'nt-blink-on (not on)))))
 
@@ -307,7 +308,7 @@
       (setq nt-blink-last key)
       (when key
         (let ((ov (make-overlay other (1+ other))))
-          (overlay-put ov 'face 'show-paren-match)
+          (overlay-put ov 'face 'default)
           (overlay-put ov 'nt-blink-base (get-text-property other 'face))
           (overlay-put ov 'nt-blink-on t)
           (overlay-put ov 'priority (1+ show-paren-priority))
