@@ -8,11 +8,7 @@
 (setenv "PHP_CS_FIXER_IGNORE_ENV" "true"); to set whe php-cs-fixer has to work with php8.4
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
-; Disable Signature (setq package-check-signature nil)
-; enable the below to disable the signature check, so you can install the updates via :
-; M-x package-install RET gnu-elpa-keyring-update
-; After you disable it again to be more secure
-; (setq package-check-signature nil)
+(setq package-check-signature nil)
 
 ;Disable Error Logs
 (setq create-lockfiles nil)
@@ -28,7 +24,7 @@
 ; Another way to install packages
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
     projectile hydra flycheck company avy which-key helm-xref dap-mode
-    rainbow-delimiters paredit))
+    rainbow-delimiters))
 
 (when (cl-find-if-not #'package-installed-p package-selected-packages)
   (package-refresh-contents)
@@ -256,9 +252,10 @@
 
 (electric-pair-mode 1)
 
-(use-package paredit
-  :ensure t
-  :hook ((emacs-lisp-mode lisp-mode) . paredit-mode))
+(when (and (>= emacs-major-version 29) (package-installed-p 'paredit))
+  (require 'paredit)
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode))
 
 (defvar nt-blink-overlays nil)
 (defvar nt-blink-timer nil)
