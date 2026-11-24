@@ -164,7 +164,7 @@ Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatt
 - `show-paren-mode` with `show-paren-style 'parenthesis` highlights only the two matching delimiters; mismatches are red.
 - `electric-pair-mode` inserts a matching delimiter when you type an opening one.
 - `paredit-mode` is enabled in `emacs-lisp-mode` and `lisp-mode` for structural editing (slurp, barf, wrap, move by expression).
-- Only the matching (second) paren keeps blinking by toggling its background while the cursor sits on the first one, at the normal cursor blink rate (`blink-cursor-delay` / `blink-cursor-interval`). The paren under the cursor stays still because the cursor itself blinks.
+- Only the matching (second) paren keeps swapping between its normal background and the blink background while the cursor sits on the first one (`blink-cursor-interval`). The paren under the cursor stays still; the built-in cursor jump (`blink-matching-paren`) is off.
 
 Useful built-in motion: `C-M-f` / `C-M-b` move by form, `C-M-SPC` marks one form, `C-M-u` moves up a level, and `M-x check-parens` finds unbalanced delimiters.
 

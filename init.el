@@ -265,40 +265,46 @@
 
 (defvar nt-blink-overlays nil)
 (defvar nt-blink-timer nil)
+(defvar nt-blink-last nil)
 
 (defun nt-blink-clear ()
   (when (timerp nt-blink-timer)
     (cancel-timer nt-blink-timer))
-  (setq nt-blink-timer nil)
+  (setq nt-blink-timer nil
+        nt-blink-last nil)
   (mapc #'delete-overlay nt-blink-overlays)
   (setq nt-blink-overlays nil))
 
 (defun nt-blink-toggle ()
   (dolist (ov nt-blink-overlays)
-    (if (overlay-get ov 'face)
-        (overlay-put ov 'face nil)
-      (overlay-put ov 'face 'nt-paren-blink))))
+    (let ((on (overlay-get ov 'nt-blink-on)))
+      (overlay-put ov 'face (if on 'show-paren-match 'nt-paren-blink))
+      (overlay-put ov 'nt-blink-on (not on)))))
 
 (defun nt-blink-paren-pair ()
-  (nt-blink-clear)
   (let* ((p (point))
          (open (eq (char-after p) ?\())
          (close (eq (char-after (1- p)) ?\)))
-         (at (cond (open p) (close (1- p)))))
-    (when at
-      (let ((other (condition-case nil
-                       (if open
-                           (1- (scan-sexps at 1))
-                         (scan-sexps (1+ at) -1))
-                     (error nil))))
-        (when other
-          (let ((ov (make-overlay other (1+ other))))
-            (overlay-put ov 'face 'nt-paren-blink)
-            (overlay-put ov 'priority 100)
-            (push ov nt-blink-overlays))
-          (setq nt-blink-timer
-                (run-at-time blink-cursor-delay blink-cursor-interval
-                             #'nt-blink-toggle)))))))
+         (at (cond (open p) (close (1- p))))
+         (other (when at
+                  (condition-case nil
+                      (if open
+                          (1- (scan-sexps at 1))
+                        (scan-sexps (1+ at) -1))
+                    (error nil))))
+         (key (when other (cons (current-buffer) other))))
+    (unless (equal key nt-blink-last)
+      (nt-blink-clear)
+      (setq nt-blink-last key)
+      (when key
+        (let ((ov (make-overlay other (1+ other))))
+          (overlay-put ov 'face 'nt-paren-blink)
+          (overlay-put ov 'nt-blink-on t)
+          (overlay-put ov 'priority 100)
+          (push ov nt-blink-overlays))
+        (setq nt-blink-timer
+              (run-at-time blink-cursor-interval blink-cursor-interval
+                           #'nt-blink-toggle))))))
 
 (add-hook 'post-command-hook #'nt-blink-paren-pair)
 
