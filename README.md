@@ -157,7 +157,7 @@ Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatt
 
 ### Rainbow Delimiters
 
-`rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces are bold and slightly larger for visibility.
+`rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces use bright colored backgrounds with dark bold text for visibility.
 
 ### Backup & Lockfiles
 

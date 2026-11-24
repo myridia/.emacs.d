@@ -232,12 +232,18 @@
   :hook (prog-mode . rainbow-delimiters-mode)
   :config
   (setq rainbow-delimiters-max-face-count 9)
-  (dotimes (i rainbow-delimiters-max-face-count)
-    (set-face-attribute
-     (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
-     nil :weight 'bold :height 1.2))
+  (let ((i 1)
+        (colors '("#ff5f56" "#ffbd2e" "#27c93f" "#4cc9f0" "#b388ff"
+                  "#ff7ac6" "#00e5ff" "#ffb74d" "#9ccc65")))
+    (while colors
+      (set-face-attribute
+       (intern (format "rainbow-delimiters-depth-%d-face" i))
+       nil :foreground "#000000" :background (car colors)
+       :weight 'bold :height 1.35)
+      (setq i (1+ i) colors (cdr colors))))
   (set-face-attribute 'rainbow-delimiters-unmatched-face nil
-                      :foreground "red" :weight 'bold :inverse-video t))
+                      :foreground "#ffffff" :background "#ff0000"
+                      :weight 'bold))
 
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
