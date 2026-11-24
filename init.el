@@ -307,9 +307,10 @@
       (setq nt-blink-last key)
       (when key
         (let ((ov (make-overlay other (1+ other))))
-          (overlay-put ov 'face 'nt-paren-blink)
+          (overlay-put ov 'face 'show-paren-match)
+          (overlay-put ov 'nt-blink-base (get-text-property other 'face))
           (overlay-put ov 'nt-blink-on t)
-          (overlay-put ov 'priority 100)
+          (overlay-put ov 'priority (1+ show-paren-priority))
           (push ov nt-blink-overlays))
         (nt-blink-arm)))))
 
