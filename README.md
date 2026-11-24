@@ -32,11 +32,6 @@ git push codeberg
 ```
 
 
-Here's a tailored **README.md** for your specific Emacs configuration:
-
-
-
-
 ## ✨ Features
 
 - **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, etc.)
@@ -54,7 +49,7 @@ Here's a tailored **README.md** for your specific Emacs configuration:
 ### 1. Backup & Clone
 ```bash
 mv ~/.emacs.d ~/.emacs.d.backup.$(date +%Y%m%d)
-git clone https://github.com/myridia/emacs_starter.git ~/.emacs.d
+git clone https://github.com/myridia/.emacs.d.git ~/.emacs.d
 ```
 
 ### 2. Install External Tools
@@ -112,6 +107,7 @@ All packages will auto-install on first run.
 | **PlantUML** | `plantuml-mode` | - | - |
 | **AutoHotkey** | `ahk-mode` | - | - |
 | **CMake** | `cmake-mode` | - | - |
+| **Emacs Lisp / Common Lisp** | `emacs-lisp-mode` / `lisp-mode` | - | - |
 
 ## ⌨️ Key Bindings
 
@@ -158,6 +154,10 @@ Ensure `phpactor` and `php-cs-fixer` are in `/usr/bin/` or update paths:
 ### Python Setup
 
 Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatting.
+
+### Rainbow Delimiters
+
+`rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces are bold and slightly larger for visibility.
 
 ### Backup & Lockfiles
 

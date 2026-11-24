@@ -229,7 +229,15 @@
 ;Hooks
 (use-package rainbow-delimiters
   :ensure t
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :config
+  (setq rainbow-delimiters-max-face-count 9)
+  (dotimes (i rainbow-delimiters-max-face-count)
+    (set-face-attribute
+     (intern (format "rainbow-delimiters-depth-%d-face" (1+ i)))
+     nil :weight 'bold :height 1.2))
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :foreground "red" :weight 'bold :inverse-video t))
 
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
