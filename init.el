@@ -247,6 +247,7 @@
 
 (show-paren-mode 1)
 (setq show-paren-style 'parenthesis)
+(setq blink-matching-paren nil)
 (set-face-attribute 'show-paren-match nil
                     :background "#ffbd2e" :foreground "#000000" :weight 'bold)
 (set-face-attribute 'show-paren-mismatch nil
@@ -291,11 +292,10 @@
                          (scan-sexps (1+ at) -1))
                      (error nil))))
         (when other
-          (dolist (n (list at other))
-            (let ((ov (make-overlay n (1+ n))))
-              (overlay-put ov 'face 'nt-paren-blink)
-              (overlay-put ov 'priority 100)
-              (push ov nt-blink-overlays)))
+          (let ((ov (make-overlay other (1+ other))))
+            (overlay-put ov 'face 'nt-paren-blink)
+            (overlay-put ov 'priority 100)
+            (push ov nt-blink-overlays))
           (setq nt-blink-timer
                 (run-at-time blink-cursor-delay blink-cursor-interval
                              #'nt-blink-toggle)))))))
