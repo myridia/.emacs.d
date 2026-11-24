@@ -246,7 +246,7 @@
                       :weight 'bold))
 
 (show-paren-mode 1)
-(setq show-paren-style 'expression)
+(setq show-paren-style 'parenthesis)
 (set-face-attribute 'show-paren-match nil
                     :background "#ffbd2e" :foreground "#000000" :weight 'bold)
 (set-face-attribute 'show-paren-mismatch nil
@@ -259,8 +259,8 @@
   :hook ((emacs-lisp-mode lisp-mode) . paredit-mode))
 
 (require 'pulse)
-(setq pulse-delay 0.02
-      pulse-iterations 4)
+(setq pulse-delay 0.01
+      pulse-iterations 2)
 
 (defface nt-paren-blink
   '((t (:background "#ffffff" :foreground "#000000" :weight bold)))
