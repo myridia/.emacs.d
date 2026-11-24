@@ -303,7 +303,7 @@
                           (1- (scan-sexps at 1))
                         (scan-sexps (1+ at) -1))
                     (error nil))))
-         (key (when other (cons (current-buffer) other))))
+         (key (when other (cons (current-buffer) other)))
     (if (equal key nt-blink-last)
         (nt-blink-arm)
       (nt-blink-clear)
