@@ -297,7 +297,8 @@
               (overlay-put ov 'priority 100)
               (push ov nt-blink-overlays)))
           (setq nt-blink-timer
-                (run-at-time 0.08 0.08 #'nt-blink-toggle)))))))
+                (run-at-time blink-cursor-delay blink-cursor-interval
+                             #'nt-blink-toggle)))))))
 
 (add-hook 'post-command-hook #'nt-blink-paren-pair)
 
