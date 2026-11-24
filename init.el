@@ -258,15 +258,28 @@
   :ensure t
   :hook ((emacs-lisp-mode lisp-mode) . paredit-mode))
 
-(require 'pulse)
-(setq pulse-delay 0.01
-      pulse-iterations 2)
-
 (defface nt-paren-blink
   '((t (:background "#ffffff" :foreground "#000000" :weight bold)))
-  "Face for the brief matching-paren blink.")
+  "Face for the repeating matching-paren blink.")
+
+(defvar nt-blink-overlays nil)
+(defvar nt-blink-timer nil)
+
+(defun nt-blink-clear ()
+  (when (timerp nt-blink-timer)
+    (cancel-timer nt-blink-timer))
+  (setq nt-blink-timer nil)
+  (mapc #'delete-overlay nt-blink-overlays)
+  (setq nt-blink-overlays nil))
+
+(defun nt-blink-toggle ()
+  (dolist (ov nt-blink-overlays)
+    (if (overlay-get ov 'face)
+        (overlay-put ov 'face nil)
+      (overlay-put ov 'face 'nt-paren-blink))))
 
 (defun nt-blink-paren-pair ()
+  (nt-blink-clear)
   (let* ((p (point))
          (open (eq (char-after p) ?\())
          (close (eq (char-after (1- p)) ?\)))
@@ -278,8 +291,13 @@
                          (scan-sexps (1+ at) -1))
                      (error nil))))
         (when other
-          (pulse-momentary-highlight-region at (1+ at) 'nt-paren-blink)
-          (pulse-momentary-highlight-region other (1+ other) 'nt-paren-blink))))))
+          (dolist (n (list at other))
+            (let ((ov (make-overlay n (1+ n))))
+              (overlay-put ov 'face 'nt-paren-blink)
+              (overlay-put ov 'priority 100)
+              (push ov nt-blink-overlays)))
+          (setq nt-blink-timer
+                (run-at-time 0.08 0.08 #'nt-blink-toggle)))))))
 
 (add-hook 'post-command-hook #'nt-blink-paren-pair)
 

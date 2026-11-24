@@ -11,7 +11,7 @@ A multi-language Emacs IDE configuration with auto-formatting on save, LSP suppo
 - projectile + helm (project navigation)
 - format-all / prettier / php-cs-fixer / ruff / rustfmt (formatters)
 - rainbow-delimiters (rainbow parentheses for Lisp/Elisp/programming modes)
-- show-paren-mode + electric-pair-mode + paredit + pulse blink (Lisp/Elisp structural editing, matching-form highlighting, brief paren flash)
+- show-paren-mode + electric-pair-mode + paredit + repeating paren blink (Lisp/Elisp structural editing, delimiter highlighting, continuous pair blink while cursor is on a paren)
 
 ## Build
 No build step. Clone into `~/.emacs.d` and launch Emacs. Packages auto-install on first run.
