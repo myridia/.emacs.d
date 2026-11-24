@@ -8,7 +8,7 @@
 (setenv "PHP_CS_FIXER_IGNORE_ENV" "true"); to set whe php-cs-fixer has to work with php8.4
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
-(setq package-check-signature nil)
+;(setq package-check-signature nil)
 
 ;Disable Error Logs
 (setq create-lockfiles nil)
