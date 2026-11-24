@@ -10,6 +10,7 @@ A multi-language Emacs IDE configuration with auto-formatting on save, LSP suppo
 - flycheck (syntax checking)
 - projectile + helm (project navigation)
 - format-all / prettier / php-cs-fixer / ruff / rustfmt (formatters)
+- rainbow-delimiters (rainbow parentheses for Lisp/Elisp/programming modes)
 
 ## Build
 No build step. Clone into `~/.emacs.d` and launch Emacs. Packages auto-install on first run.
