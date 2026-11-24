@@ -278,15 +278,14 @@
 (defun nt-blink-arm ()
   (unless nt-blink-timer
     (setq nt-blink-timer
-          (run-at-time blink-cursor-interval nil #'nt-blink-toggle))))
+          (run-at-time blink-cursor-interval blink-cursor-interval
+                       #'nt-blink-toggle))))
 
 (defun nt-blink-toggle ()
-  (setq nt-blink-timer nil)
   (dolist (ov nt-blink-overlays)
     (let ((on (overlay-get ov 'nt-blink-on)))
       (overlay-put ov 'face (if on 'show-paren-match 'nt-paren-blink))
-      (overlay-put ov 'nt-blink-on (not on))))
-  (nt-blink-arm))
+      (overlay-put ov 'nt-blink-on (not on)))))
 
 (defun nt-blink-paren-pair ()
   (let* ((p (point))
