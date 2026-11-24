@@ -23,10 +23,7 @@
 
 (defun nt-install (pkg)
   (condition-case err
-      (progn
-        (unless package-archive-contents
-          (package-refresh-contents))
-        (package-install pkg))
+      (package-install pkg)
     (error (message "Skipping %s: %s" pkg (error-message-string err)))))
 
 ; Another way to install packages
@@ -34,137 +31,108 @@
     projectile hydra flycheck company avy which-key helm-xref dap-mode
     rainbow-delimiters))
 
-(when (cl-find-if-not #'package-installed-p package-selected-packages)
-  (package-refresh-contents)
-  (mapc #'nt-install package-selected-packages))
+(mapc #'nt-install package-selected-packages)
 
 ;Package Installs
-(unless package-archive-contents
-  (package-refresh-contents))
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (nt-install 'use-package)
   )
 
 (unless(package-installed-p 'vue-mode)
-  (package-refresh-contents)
   (nt-install 'vue-mode)
   )
 
 (unless(package-installed-p 'rust-mode)
-  (package-refresh-contents)
   (nt-install 'rust-mode)
   )
 
 (unless(package-installed-p 'jinja2-mode)
-  (package-refresh-contents)
   (nt-install 'jinja2-mode))
 
 
 (unless(package-installed-p 'markdown-mode)
-  (package-refresh-contents)
   (nt-install 'markdown-mode)
   )
 
 (unless(package-installed-p 'company)
-  (package-refresh-contents)
   (nt-install 'company)
 )
 
 (unless(package-installed-p 'lsp-ui)
-  (package-refresh-contents)
   (nt-install 'lsp-ui)
   )
 
 (unless(package-installed-p 'anaconda-mode)
-  (package-refresh-contents)
   (nt-install 'anaconda-mode)
   )
 
 (unless(package-installed-p 'company-anaconda)
-  (package-refresh-contents)
   (nt-install 'company-anaconda)
   )
 
 (unless(package-installed-p 'docker-compose-mode)
-  (package-refresh-contents)
   (nt-install 'docker-compose-mode)
   )
 
 (unless(package-installed-p 'yaml-mode)
-  (package-refresh-contents)
   (nt-install 'yaml-mode)
 )
 
 
 (unless(package-installed-p 'php-mode)
-  (package-refresh-contents)
   (nt-install 'php-mode)
 )
 
 (unless(package-installed-p 'web-mode)
-  (package-refresh-contents)
   (nt-install 'web-mode)
 )
 
 (unless(package-installed-p 'plantuml-mode)
-  (package-refresh-contents)
   (nt-install 'plantuml-mode)
   )
 
 (unless(package-installed-p 'svg-tag-mode)
-  (package-refresh-contents)
   (nt-install 'svg-tag-mode)
   )
 
 (unless(package-installed-p 'go-mode)
-  (package-refresh-contents)
   (nt-install 'go-mode)
   )
 
 (unless(package-installed-p 'kotlin-mode)
-  (package-refresh-contents)
   (nt-install 'kotlin-mode)
   )
 
 (unless(package-installed-p 'js2-mode)
-  (package-refresh-contents)
   (nt-install 'js2-mode)
   )
 
 (unless(package-installed-p 'cmake-mode)
-  (package-refresh-contents)
   (nt-install 'cmake-mode)
   )
 
 (unless(package-installed-p 'ahk-mode)
-  (package-refresh-contents)
   (nt-install 'ahk-mode)
   )
 
 (unless(package-installed-p 'cc-mode)
-  (package-refresh-contents)
   (nt-install 'cc-mode)
   )
 
 (unless(package-installed-p 'elixir-mode)
-  (package-refresh-contents)
   (nt-install 'elixir-mode)
   )
 
 (unless(package-installed-p 'lsp-mode)
-  (package-refresh-contents)
   (nt-install 'lsp-mode)
   )
 
 (unless(package-installed-p 'clang-format)
-  (package-refresh-contents)
   (nt-install 'clang-format)
   )
 
 (unless(package-installed-p 'format-all)
-  (package-refresh-contents)
   (nt-install 'format-all)
   )
 
@@ -190,7 +158,6 @@
 ; sudo chmod a+x php-cs-fixer
 ; sudo mv php-cs-fixer /usr/bin/php-cs-fixer
 (unless(package-installed-p 'php-cs-fixer)
-  (package-refresh-contents)
   (nt-install 'php-cs-fixer)
   )
 
@@ -198,18 +165,15 @@
 ; Required
 ; sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
-  (package-refresh-contents)
   (nt-install 'prettier-js)
   )
 
 (unless(package-installed-p 'reformatter)
-  (package-refresh-contents)
   (nt-install 'reformatter)
   )
 ;Require
 ;curl -LsSf https://astral.sh/ruff/install.sh | sh
 (unless(package-installed-p 'ruff-format)
-  (package-refresh-contents)
   (nt-install 'ruff-format)
   )
 

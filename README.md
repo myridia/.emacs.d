@@ -43,7 +43,7 @@ git push codeberg
 - **Custom utilities** for development workflow
 - **Rainbow delimiters** for Lisp/Elisp/programming modes
 - **No lockfiles** + centralized backups (`~/.saves`)
-- Package installs are failure-tolerant: a package needing a newer Emacs is skipped with a message instead of aborting startup
+- No network access at startup: `package-refresh-contents` was removed from the init file; installs only happen on demand and failures are skipped with a message
 
 ## 🚀 Quick Start
 
