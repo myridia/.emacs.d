@@ -160,14 +160,14 @@ Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatt
 
 ### Rainbow Delimiters
 
-`rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces use bright colored backgrounds with dark bold text for visibility.
+`rainbow-delimiters-mode` is enabled only in `lisp-mode` and `emacs-lisp-mode`, so `.lisp` and `.el` buffers show nested parentheses in depth colors. JavaScript, C, and other programming buffers are not affected. Matching delimiters share the same color. Faces use bright colored backgrounds with dark bold text for visibility.
 
 ### Lisp Readability
 
-- `show-paren-mode` with `show-paren-style 'parenthesis` highlights only the matching delimiter; `show-paren-highlight-openparen` is off so the brace under the cursor keeps its normal color. Mismatches are red.
+- `show-paren-local-mode` is enabled only in `lisp-mode` and `emacs-lisp-mode`. Global `show-paren-mode` is off. With `show-paren-style 'parenthesis`, only the matching delimiter is highlighted; `show-paren-highlight-openparen` is off so the brace under the cursor keeps its normal color. Mismatches are red.
 - `electric-pair-mode` inserts a matching delimiter when you type an opening one.
 - `paredit-mode` is enabled in `emacs-lisp-mode` and `lisp-mode` when `paredit` is already installed on Emacs 29+; it is no longer auto-installed at startup.
-- Only the matching (second) paren blinks between no background (`default`) and its original rainbow color while the cursor sits on the first one, using the cursor's own `blink-cursor-delay` and `blink-cursor-interval`. The overlay priority is kept above `show-paren-priority` so the blink is visible. The built-in cursor jump (`blink-matching-paren`) is off.
+- Only the matching (second) paren blinks between no background (`default`) and its original rainbow color while the cursor sits on the first one in `.lisp`/`.el` buffers, using the cursor's own `blink-cursor-delay` and `blink-cursor-interval`. The overlay priority is kept above `show-paren-priority` so the blink is visible. The built-in cursor jump (`blink-matching-paren`) is off.
 
 Useful built-in motion: `C-M-f` / `C-M-b` move by form, `C-M-SPC` marks one form, `C-M-u` moves up a level, and `M-x check-parens` finds unbalanced delimiters.
 

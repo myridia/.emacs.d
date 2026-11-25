@@ -201,7 +201,7 @@
 ;Hooks
 (use-package rainbow-delimiters
   :ensure nil
-  :hook (prog-mode . rainbow-delimiters-mode)
+  :hook ((emacs-lisp-mode lisp-mode) . rainbow-delimiters-mode)
   :config
   (setq rainbow-delimiters-max-face-count 9)
   (let ((i 1)
@@ -217,7 +217,7 @@
                       :foreground "#ffffff" :background "#ff0000"
                       :weight 'bold))
 
-(show-paren-mode 1)
+(show-paren-mode -1)
 (setq show-paren-style 'parenthesis)
 (setq show-paren-highlight-openparen nil)
 (setq blink-matching-paren nil)
@@ -225,6 +225,13 @@
                     :background "#ffbd2e" :foreground "#000000" :weight 'bold)
 (set-face-attribute 'show-paren-mismatch nil
                     :background "#ff0000" :foreground "#ffffff" :weight 'bold)
+
+(when (fboundp 'show-paren-local-mode)
+  (defun nt-enable-lisp-paren-highlighting ()
+    (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+      (show-paren-local-mode 1)))
+  (add-hook 'emacs-lisp-mode-hook #'nt-enable-lisp-paren-highlighting)
+  (add-hook 'lisp-mode-hook #'nt-enable-lisp-paren-highlighting))
 
 (electric-pair-mode 1)
 
@@ -265,34 +272,39 @@
                              (overlay-get ov 'nt-blink-base)))
       (overlay-put ov 'nt-blink-on (not on)))))
 
+(defun nt-lisp-paren-buffer-p ()
+  (derived-mode-p 'emacs-lisp-mode 'lisp-mode))
+
 (defun nt-blink-paren-pair ()
-  (let* ((p (point))
-         (open (eq (char-after p) ?\())
-         (close (eq (char-after p) ?\)))
-         (at (cond (open p)
-                   (close p)
-                   ((eq (char-before p) ?\() (1- p))
-                   ((eq (char-before p) ?\)) (1- p))))
-         (is-open (or open (eq (char-before p) ?\()))
-         (other (when at
-                  (condition-case nil
-                      (if is-open
-                          (1- (scan-sexps at 1))
-                        (scan-sexps (1+ at) -1))
-                    (error nil))))
-         (key (when other (cons (current-buffer) other))))
-    (if (equal key nt-blink-last)
-        (nt-blink-arm)
+  (if (not (nt-lisp-paren-buffer-p))
       (nt-blink-clear)
-      (setq nt-blink-last key)
-      (when key
-        (let ((ov (make-overlay other (1+ other))))
-          (overlay-put ov 'face 'default)
-          (overlay-put ov 'nt-blink-base (get-text-property other 'face))
-          (overlay-put ov 'nt-blink-on t)
-          (overlay-put ov 'priority (1+ show-paren-priority))
-          (push ov nt-blink-overlays))
-        (nt-blink-arm)))))
+    (let* ((p (point))
+           (open (eq (char-after p) ?\())
+           (close (eq (char-after p) ?\)))
+           (at (cond (open p)
+                     (close p)
+                     ((eq (char-before p) ?\() (1- p))
+                     ((eq (char-before p) ?\)) (1- p))))
+           (is-open (or open (eq (char-before p) ?\()))
+           (other (when at
+                    (condition-case nil
+                        (if is-open
+                            (1- (scan-sexps at 1))
+                          (scan-sexps (1+ at) -1))
+                      (error nil))))
+           (key (when other (cons (current-buffer) other))))
+      (if (equal key nt-blink-last)
+          (nt-blink-arm)
+        (nt-blink-clear)
+        (setq nt-blink-last key)
+        (when key
+          (let ((ov (make-overlay other (1+ other))))
+            (overlay-put ov 'face 'default)
+            (overlay-put ov 'nt-blink-base (get-text-property other 'face))
+            (overlay-put ov 'nt-blink-on t)
+            (overlay-put ov 'priority (1+ show-paren-priority))
+            (push ov nt-blink-overlays))
+          (nt-blink-arm))))))
 
 (add-hook 'post-command-hook #'nt-blink-paren-pair)
 
