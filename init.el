@@ -233,6 +233,12 @@
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'lisp-mode-hook #'paredit-mode))
 
+(defun nt-format-lisp-buffer ()
+  (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+    (indent-region (point-min) (point-max))))
+
+(add-hook 'before-save-hook #'nt-format-lisp-buffer)
+
 (defvar nt-blink-overlays nil)
 (defvar nt-blink-timer nil)
 (defvar nt-blink-last nil)

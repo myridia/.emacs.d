@@ -1,3 +1,5 @@
+<img src=".emacs.d.svg" alt="emacs.d" width="120">
+
 # ![emacs.d](pages/public/img/icon_192x192.png) emacs.d
 
 # Emacs IDE Starter Configuration
@@ -34,7 +36,7 @@ git push codeberg
 
 ## ✨ Features
 
-- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, etc.)
+- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, Lisp/Elisp, etc.)
 - **LSP integration** via `lsp-mode` with `lsp-ui`
 - **Syntax checking** with `flycheck`
 - **Auto-completion** with `company` + `anaconda` (Python)
@@ -108,7 +110,7 @@ All packages will auto-install on first run.
 | **PlantUML** | `plantuml-mode` | - | - |
 | **AutoHotkey** | `ahk-mode` | - | - |
 | **CMake** | `cmake-mode` | - | - |
-| **Emacs Lisp / Common Lisp** | `emacs-lisp-mode` / `lisp-mode` | - | - |
+| **Emacs Lisp / Common Lisp** | `emacs-lisp-mode` / `lisp-mode` | `indent-region` | - |
 
 ## ⌨️ Key Bindings
 
