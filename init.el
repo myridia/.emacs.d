@@ -8,11 +8,7 @@
 (setenv "PHP_CS_FIXER_IGNORE_ENV" "true"); to set whe php-cs-fixer has to work with php8.4
 (setq inhibit-startup-message t initial-scratch-message x cursor-type 'bar)
 
-; Disable Signature (setq package-check-signature nil)
-; enable the below to disable the signature check, so you can install the updates via :
-; M-x package-install RET gnu-elpa-keyring-update
-; After you disable it again to be more secure
-; (setq package-check-signature nil)
+;(setq package-check-signature nil)
 
 ;Disable Error Logs
 (setq create-lockfiles nil)
@@ -25,142 +21,123 @@
 (add-to-list 'package-archives'("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+(defun nt-install (pkg)
+  (unless (package-installed-p pkg)
+    (condition-case err
+        (progn
+          (unless package-archive-contents
+            (package-refresh-contents))
+          (package-install pkg))
+      (error (message "Skipping %s: %s" pkg (error-message-string err))))))
+
 ; Another way to install packages
 (setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
-    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+    projectile hydra flycheck company avy which-key helm-xref dap-mode
+    rainbow-delimiters))
 
-(when (cl-find-if-not #'package-installed-p package-selected-packages)
-  (package-refresh-contents)
-  (mapc #'package-install package-selected-packages))
+(mapc #'nt-install package-selected-packages)
 
 ;Package Installs
-(unless package-archive-contents
-  (package-refresh-contents))
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
+  (nt-install 'use-package)
   )
 
 (unless(package-installed-p 'vue-mode)
-  (package-refresh-contents)
-  (package-install 'vue-mode)
+  (nt-install 'vue-mode)
   )
 
 (unless(package-installed-p 'rust-mode)
-  (package-refresh-contents)
-  (package-install 'rust-mode)
+  (nt-install 'rust-mode)
   )
 
 (unless(package-installed-p 'jinja2-mode)
-  (package-refresh-contents)
-  (package-install 'jinja2-mode))
+  (nt-install 'jinja2-mode))
 
 
 (unless(package-installed-p 'markdown-mode)
-  (package-refresh-contents)
-  (package-install 'markdown-mode)
+  (nt-install 'markdown-mode)
   )
 
 (unless(package-installed-p 'company)
-  (package-refresh-contents)
-  (package-install 'company)
+  (nt-install 'company)
 )
 
 (unless(package-installed-p 'lsp-ui)
-  (package-refresh-contents)
-  (package-install 'lsp-ui)
+  (nt-install 'lsp-ui)
   )
 
 (unless(package-installed-p 'anaconda-mode)
-  (package-refresh-contents)
-  (package-install 'anaconda-mode)
+  (nt-install 'anaconda-mode)
   )
 
 (unless(package-installed-p 'company-anaconda)
-  (package-refresh-contents)
-  (package-install 'company-anaconda)
+  (nt-install 'company-anaconda)
   )
 
 (unless(package-installed-p 'docker-compose-mode)
-  (package-refresh-contents)
-  (package-install 'docker-compose-mode)
+  (nt-install 'docker-compose-mode)
   )
 
 (unless(package-installed-p 'yaml-mode)
-  (package-refresh-contents)
-  (package-install 'yaml-mode)
+  (nt-install 'yaml-mode)
 )
 
 
 (unless(package-installed-p 'php-mode)
-  (package-refresh-contents)
-  (package-install 'php-mode)
+  (nt-install 'php-mode)
 )
 
 (unless(package-installed-p 'web-mode)
-  (package-refresh-contents)
-  (package-install 'web-mode)
+  (nt-install 'web-mode)
 )
 
 (unless(package-installed-p 'plantuml-mode)
-  (package-refresh-contents)
-  (package-install 'plantuml-mode)
+  (nt-install 'plantuml-mode)
   )
 
 (unless(package-installed-p 'svg-tag-mode)
-  (package-refresh-contents)
-  (package-install 'svg-tag-mode)
+  (nt-install 'svg-tag-mode)
   )
 
 (unless(package-installed-p 'go-mode)
-  (package-refresh-contents)
-  (package-install 'go-mode)
+  (nt-install 'go-mode)
   )
 
 (unless(package-installed-p 'kotlin-mode)
-  (package-refresh-contents)
-  (package-install 'kotlin-mode)
+  (nt-install 'kotlin-mode)
   )
 
 (unless(package-installed-p 'js2-mode)
-  (package-refresh-contents)
-  (package-install 'js2-mode)
+  (nt-install 'js2-mode)
   )
 
 (unless(package-installed-p 'cmake-mode)
-  (package-refresh-contents)
-  (package-install 'cmake-mode)
+  (nt-install 'cmake-mode)
   )
 
 (unless(package-installed-p 'ahk-mode)
-  (package-refresh-contents)
-  (package-install 'ahk-mode)
+  (nt-install 'ahk-mode)
   )
 
 (unless(package-installed-p 'cc-mode)
-  (package-refresh-contents)
-  (package-install 'cc-mode)
+  (nt-install 'cc-mode)
   )
 
 (unless(package-installed-p 'elixir-mode)
-  (package-refresh-contents)
-  (package-install 'elixir-mode)
+  (nt-install 'elixir-mode)
   )
 
 (unless(package-installed-p 'lsp-mode)
-  (package-refresh-contents)
-  (package-install 'lsp-mode)
+  (nt-install 'lsp-mode)
   )
 
 (unless(package-installed-p 'clang-format)
-  (package-refresh-contents)
-  (package-install 'clang-format)
+  (nt-install 'clang-format)
   )
 
 (unless(package-installed-p 'format-all)
-  (package-refresh-contents)
-  (package-install 'format-all)
+  (nt-install 'format-all)
   )
 
 
@@ -185,31 +162,27 @@
 ; sudo chmod a+x php-cs-fixer
 ; sudo mv php-cs-fixer /usr/bin/php-cs-fixer
 (unless(package-installed-p 'php-cs-fixer)
-  (package-refresh-contents)
-  (package-install 'php-cs-fixer)
+  (nt-install 'php-cs-fixer)
   )
 
 
 ; Required
 ; sudo npm i -g prettier
 (unless(package-installed-p 'prettier-js)
-  (package-refresh-contents)
-  (package-install 'prettier-js)
+  (nt-install 'prettier-js)
   )
 
 (unless(package-installed-p 'reformatter)
-  (package-refresh-contents)
-  (package-install 'reformatter)
+  (nt-install 'reformatter)
   )
 ;Require
 ;curl -LsSf https://astral.sh/ruff/install.sh | sh
 (unless(package-installed-p 'ruff-format)
-  (package-refresh-contents)
-  (package-install 'ruff-format)
+  (nt-install 'ruff-format)
   )
 
 (use-package js2-mode
-  :ensure t
+  :ensure nil
   :mode (("\\.js$" . js2-mode)) ;; makes sure we use only for js
   :interpreter ("node" . js2-mode)
   :config
@@ -226,6 +199,103 @@
 
 
 ;Hooks
+(use-package rainbow-delimiters
+  :ensure nil
+  :hook (prog-mode . rainbow-delimiters-mode)
+  :config
+  (setq rainbow-delimiters-max-face-count 9)
+  (let ((i 1)
+        (colors '("#ff5f56" "#ffbd2e" "#27c93f" "#4cc9f0" "#b388ff"
+                  "#ff7ac6" "#00e5ff" "#ffb74d" "#9ccc65")))
+    (while colors
+      (set-face-attribute
+       (intern (format "rainbow-delimiters-depth-%d-face" i))
+       nil :foreground "#000000" :background (car colors)
+       :weight 'bold :height 1.35)
+      (setq i (1+ i) colors (cdr colors))))
+  (set-face-attribute 'rainbow-delimiters-unmatched-face nil
+                      :foreground "#ffffff" :background "#ff0000"
+                      :weight 'bold))
+
+(show-paren-mode 1)
+(setq show-paren-style 'parenthesis)
+(setq show-paren-highlight-openparen nil)
+(setq blink-matching-paren nil)
+(set-face-attribute 'show-paren-match nil
+                    :background "#ffbd2e" :foreground "#000000" :weight 'bold)
+(set-face-attribute 'show-paren-mismatch nil
+                    :background "#ff0000" :foreground "#ffffff" :weight 'bold)
+
+(electric-pair-mode 1)
+
+(when (and (>= emacs-major-version 29) (package-installed-p 'paredit))
+  (require 'paredit)
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'lisp-mode-hook #'paredit-mode))
+
+(defun nt-format-lisp-buffer ()
+  (when (derived-mode-p 'emacs-lisp-mode 'lisp-mode)
+    (indent-region (point-min) (point-max))))
+
+(add-hook 'before-save-hook #'nt-format-lisp-buffer)
+
+(defvar nt-blink-overlays nil)
+(defvar nt-blink-timer nil)
+(defvar nt-blink-last nil)
+
+(defun nt-blink-clear ()
+  (when nt-blink-timer
+    (cancel-timer nt-blink-timer))
+  (setq nt-blink-timer nil
+        nt-blink-last nil)
+  (mapc #'delete-overlay nt-blink-overlays)
+  (setq nt-blink-overlays nil))
+
+(defun nt-blink-arm ()
+  (unless nt-blink-timer
+    (setq nt-blink-timer
+          (run-at-time blink-cursor-delay blink-cursor-interval
+                       #'nt-blink-toggle))))
+
+(defun nt-blink-toggle ()
+  (dolist (ov nt-blink-overlays)
+    (let ((on (overlay-get ov 'nt-blink-on)))
+      (overlay-put ov 'face (if on
+                               'default
+                             (overlay-get ov 'nt-blink-base)))
+      (overlay-put ov 'nt-blink-on (not on)))))
+
+(defun nt-blink-paren-pair ()
+  (let* ((p (point))
+         (open (eq (char-after p) ?\())
+         (close (eq (char-after p) ?\)))
+         (at (cond (open p)
+                   (close p)
+                   ((eq (char-before p) ?\() (1- p))
+                   ((eq (char-before p) ?\)) (1- p))))
+         (is-open (or open (eq (char-before p) ?\()))
+         (other (when at
+                  (condition-case nil
+                      (if is-open
+                          (1- (scan-sexps at 1))
+                        (scan-sexps (1+ at) -1))
+                    (error nil))))
+         (key (when other (cons (current-buffer) other))))
+    (if (equal key nt-blink-last)
+        (nt-blink-arm)
+      (nt-blink-clear)
+      (setq nt-blink-last key)
+      (when key
+        (let ((ov (make-overlay other (1+ other))))
+          (overlay-put ov 'face 'default)
+          (overlay-put ov 'nt-blink-base (get-text-property other 'face))
+          (overlay-put ov 'nt-blink-on t)
+          (overlay-put ov 'priority (1+ show-paren-priority))
+          (push ov nt-blink-overlays))
+        (nt-blink-arm)))))
+
+(add-hook 'post-command-hook #'nt-blink-paren-pair)
+
 ;(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;c file hooks

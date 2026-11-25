@@ -1,4 +1,4 @@
-<img src=".emacs.d.svg" alt=".emacs.d" width="120">
+<img src=".emacs.d.svg" alt="emacs.d" width="120">
 
 # ![emacs.d](pages/public/img/icon_192x192.png) emacs.d
 
@@ -34,28 +34,25 @@ git push codeberg
 ```
 
 
-Here's a tailored **README.md** for your specific Emacs configuration:
-
-
-
-
 ## ✨ Features
 
-- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, etc.)
+- **Auto-formatting on save** for 10+ languages (C, Python, PHP, JS, Rust, Shell, CSS, Lisp/Elisp, etc.)
 - **LSP integration** via `lsp-mode` with `lsp-ui`
 - **Syntax checking** with `flycheck`
 - **Auto-completion** with `company` + `anaconda` (Python)
 - **Project management** with `projectile` + `helm` integration
 - **Fuzzy finding** with `helm`, `helm-lsp`, `helm-xref`
 - **Custom utilities** for development workflow
+- **Rainbow delimiters** for Lisp/Elisp/programming modes
 - **No lockfiles** + centralized backups (`~/.saves`)
+- No archive refresh on every startup: `nt-install` downloads only when a package is actually missing; `use-package` uses `:ensure nil` so it never triggers its own installs
 
 ## 🚀 Quick Start
 
 ### 1. Backup & Clone
 ```bash
 mv ~/.emacs.d ~/.emacs.d.backup.$(date +%Y%m%d)
-git clone https://github.com/myridia/emacs_starter.git ~/.emacs.d
+git clone https://github.com/myridia/.emacs.d.git ~/.emacs.d
 ```
 
 ### 2. Install External Tools
@@ -113,6 +110,7 @@ All packages will auto-install on first run.
 | **PlantUML** | `plantuml-mode` | - | - |
 | **AutoHotkey** | `ahk-mode` | - | - |
 | **CMake** | `cmake-mode` | - | - |
+| **Emacs Lisp / Common Lisp** | `emacs-lisp-mode` / `lisp-mode` | `indent-region` | - |
 
 ## ⌨️ Key Bindings
 
@@ -159,6 +157,19 @@ Ensure `phpactor` and `php-cs-fixer` are in `/usr/bin/` or update paths:
 ### Python Setup
 
 Uses `anaconda-mode` + `company-anaconda` for completion, and `ruff` for formatting.
+
+### Rainbow Delimiters
+
+`rainbow-delimiters-mode` is enabled for `prog-mode`, so Lisp, Emacs Lisp, C, and other programming buffers show nested parentheses in depth colors. Matching delimiters share the same color. Faces use bright colored backgrounds with dark bold text for visibility.
+
+### Lisp Readability
+
+- `show-paren-mode` with `show-paren-style 'parenthesis` highlights only the matching delimiter; `show-paren-highlight-openparen` is off so the brace under the cursor keeps its normal color. Mismatches are red.
+- `electric-pair-mode` inserts a matching delimiter when you type an opening one.
+- `paredit-mode` is enabled in `emacs-lisp-mode` and `lisp-mode` when `paredit` is already installed on Emacs 29+; it is no longer auto-installed at startup.
+- Only the matching (second) paren blinks between no background (`default`) and its original rainbow color while the cursor sits on the first one, using the cursor's own `blink-cursor-delay` and `blink-cursor-interval`. The overlay priority is kept above `show-paren-priority` so the blink is visible. The built-in cursor jump (`blink-matching-paren`) is off.
+
+Useful built-in motion: `C-M-f` / `C-M-b` move by form, `C-M-SPC` marks one form, `C-M-u` moves up a level, and `M-x check-parens` finds unbalanced delimiters.
 
 ### Backup & Lockfiles
 
@@ -214,7 +225,7 @@ Inserts `console.log('');` at cursor and places cursor inside quotes for JavaScr
 - **Navigation**: `helm-lsp`, `helm-xref`, `avy`, `which-key`, `hydra`
 - **Languages**: `js2-mode`, `vue-mode`, `php-mode`, `python-mode`, `rust-mode`, `go-mode`, `kotlin-mode`, `web-mode`, `markdown-mode`, `yaml-mode`, `docker-compose-mode`, `cmake-mode`, `ahk-mode`, `plantuml-mode`
 - **Formatting**: `format-all`, `prettier-js`, `php-cs-fixer`, `ruff-format`, `clang-format`
-- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`
+- **Utils**: `yasnippet`, `lsp-treemacs`, `dap-mode` (debugging), `svg-tag-mode`, `rainbow-delimiters`, `paredit`
 
 ## 🤝 Contributing
 
